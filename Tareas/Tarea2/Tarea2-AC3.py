@@ -63,7 +63,7 @@ nx.draw_kamada_kawai(G)
 domain = ["red", "blue", "green", "yellow"]
 
 #Se hace un diccionario en donde cada nodo tiene un dominio asociado, en este caso, 4 colores
-graficas = {
+grafica = {
     node: domain for node in nodes
 }
 
@@ -101,5 +101,33 @@ def revise(xi, xj):
 
     if k >= n:
         revised = True
+    
+    return revised
+
+xi = 0
+xj = 1 
+
+def revise(xi, xj):
+
+    n = len(grafica[xi])
+    m = len(grafica[xj])  # Longitud de grafica[xj]
+    
+    nuevo_dominio = []
+    
+    revised = False
+    
+    for i in range(0, n-1):
+        contador = 0
+        for j in range(0, m-1): 
+            if grafica[xi][i] != grafica[xj][j]:
+                nuevo_dominio.append(grafica[xj][j])
+                break
+            else:
+                contador += 1                 
+
+        if contador == 3:
+            grafica[xi] = nuevo_dominio
+            revised = True
+            break
     
     return revised
