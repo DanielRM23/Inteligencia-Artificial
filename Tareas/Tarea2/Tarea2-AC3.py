@@ -74,41 +74,44 @@ domain2 = ["red", "blue", "green", "yellow"]
 # xi, xj son nodos de la gráfica
 # (xi, xj) representan las aristas de la gráfica
 
+# def revise(xi, xj):
+# # En este caso xi, xj, son las etiquetas de los nodos, i.e.
+# # xi = 1, xj = 2, etc
+    
+#     #contadores para ir recorriendo los elementos del dominio
+#     i = 0
+#     j = 0
+#     # contador que ayuda a saber si es que hay elementos o no 
+#     # tales que "x" se relaciona con "y"
+#     k = 0
+    
+#     revised = False
+    
+#     # Longitud del dominio, que es la misma para todos los elementos
+#     n = len(grafica[xi])
+    
+    
+#     while i < n and j < n:
+#         if grafica[xi][i] == grafica[xj][j]:
+#             j += 1 
+#         else:
+#             k += 1
+#             i += 1
+#             j = 0
+
+#     if k >= n:
+#         revised = True
+    
+#     return revised
+
+# xi = 0
+# xj = 1 
+
 def revise(xi, xj):
-# En este caso xi, xj, son las etiquetas de los nodos, i.e.
-# xi = 1, xj = 2, etc
+    # Verificar que ambos nodos están en la gráfica
+    if xi not in grafica or xj not in grafica:
+        return False
     
-    #contadores para ir recorriendo los elementos del dominio
-    i = 0
-    j = 0
-    # contador que ayuda a saber si es que hay elementos o no 
-    # tales que "x" se relaciona con "y"
-    k = 0
-    
-    revised = False
-    
-    # Longitud del dominio, que es la misma para todos los elementos
-    n = len(grafica[xi])
-    
-    
-    while i < n and j < n:
-        if grafica[xi][i] == grafica[xj][j]:
-            j += 1 
-        else:
-            k += 1
-            i += 1
-            j = 0
-
-    if k >= n:
-        revised = True
-    
-    return revised
-
-xi = 0
-xj = 1 
-
-def revise(xi, xj):
-
     n = len(grafica[xi])
     m = len(grafica[xj])  # Longitud de grafica[xj]
     
@@ -125,9 +128,30 @@ def revise(xi, xj):
             else:
                 contador += 1                 
 
-        if contador == 3:
+        if contador == m:
             grafica[xi] = nuevo_dominio
             revised = True
             break
     
     return revised
+
+
+def AC3(grafica, edges):
+    # Se define una cola en donde se añaden los elemntos 
+    queue = [arista for arista in edges]
+
+    # Mientras la cola no sea vacía
+    while queue:
+        # Saco el primer elemento de la cola
+        (xi, xj) = queue.pop(0)
+        # Si revise(xi, xj) es true, entonces:
+        if revise(xi,xj, grafica):
+            if len(grafica[xi]) == 0:
+                return False
+
+            for xk in [n for n in G.neighbors(xi) if n != xj]:
+                queue.insert(0,(xk,xi))
+    return True
+
+
+AC3(grafica, edges)
