@@ -1,0 +1,30 @@
+para el problema de las reinas el fit sería el minimizar el número de ataques 
+
+El hacer los vectores con las reinas; al defininir el vector te quitas muchas posiciones, tomaste foto 
+
+Hacer swaps para hacer hijos, igual para mutaciones 
+
+Para el de n reinas, genera un vector de longitud n aleatoria: 
+
+Esto es un individuo
+Tienes que generar más individuos 
+
+fitnes: función de decir quien es mejo que otro
+la evaluación es contar los ataques  
+
+puede ser qué tablero es el mejor 
+
+el mayor truco de geneticos es la representación del problema 
+
+Si la diferencia entre índices es la misma es porque hay un ataque
+
+
+
+
+
+
+ordeno respecto al conflicto 
+
+ruleta es sacar promedio y tomar el mayor 
+
+torneo es ponerlos a pelear 
